@@ -1,0 +1,209 @@
+/* ===== Tema dinamis: pink (default / perempuan) dan biru (laki-laki) ===== */
+:root {
+    --aksen: deeppink;
+    --aksen-gelap: #c4106f;
+    --aksen-glow: rgba(255, 20, 147, 0.25);
+    --grad-aksen: linear-gradient(135deg, #8e6fd8 0%, #b79cf0 50%, #8e6fd8 100%);
+    --grad-latar: linear-gradient(135deg, #e6dcfa 0%, #f6f2ff 50%, #d6c8f5 100%);
+    --putih: #ffffff;
+    --abu-garis: #d4d4d8;
+    --abu-teks: #52525b;
+}
+
+body:has(#laki:checked) {
+    --aksen: #1e88e5;
+    --aksen-gelap: #1565c0;
+    --aksen-glow: rgba(30, 136, 229, 0.3);
+    --grad-aksen: linear-gradient(135deg, #1e88e5 0%, #4fc3f7 50%, #1e88e5 100%);
+    --grad-latar: linear-gradient(135deg, #cfe6ff 0%, #f0f7ff 50%, #b3d7ff 100%);
+}
+
+body:has(#perempuan:checked) {
+    --aksen: deeppink;
+    --aksen-gelap: #c4106f;
+    --aksen-glow: rgba(255, 20, 147, 0.25);
+    --grad-aksen: linear-gradient(135deg, #ff1493 0%, #ff69b4 50%, #ff1493 100%);
+    --grad-latar: linear-gradient(135deg, #ffd1e8 0%, #fff0f7 50%, #ffb8da 100%);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    padding: 28px 16px 40px;
+    background: var(--grad-latar);
+    background-attachment: fixed;
+    font-family: "Plus Jakarta Sans",  Arial, sans-serif;
+    color: var(--abu-teks);
+    line-height: 1.5;
+}
+
+/* ===== Judul + kartu form ===== */
+h1 {
+    position: relative;
+    z-index: 1;
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 18px 20px 34px;
+    background: var(--grad-aksen);
+    background-size: 200% 200%;
+    color: var(--putih);
+    font-size: 1.5rem;
+    text-align: center;
+    border-radius: 16px 16px 0 0;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+form {
+    position: relative;
+    z-index: 2;
+    max-width: 480px;
+    margin: -18px auto 0;
+    padding: 26px 22px 28px;
+    background-color: var(--putih);
+    border-radius: 18px;
+    box-shadow: 0 12px 32px var(--aksen-glow), 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+label {
+    font-weight: 600;
+    color: var(--abu-teks);
+}
+
+/* ===== Input & select ===== */
+input[type="text"],
+input[type="email"],
+input[type="date"],
+select {
+    width: 100%;
+    margin-top: 6px;
+    padding: 11px 14px;
+    background-color: #fafafa;
+    border: 1.5px solid var(--abu-garis);
+    border-radius: 10px;
+    font-size: 1rem;
+    font-family: inherit;
+    color: #27272a;
+    transition: border-color 0.2s, background-color 0.2s;
+}
+
+input::placeholder {
+    color: #a1a1aa;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="date"]:focus,
+select:focus {
+    outline: none;
+    background-color: var(--putih);
+    border-color: var(--aksen);
+    box-shadow: 0 0 0 3px var(--aksen-glow);
+    animation: percik-ring 0.5s ease-out;
+}
+
+/* ===== Checkbox & radio ===== */
+input[type="checkbox"],
+input[type="radio"] {
+    width: 19px;
+    height: 19px;
+    margin-right: 8px;
+    vertical-align: middle;
+    accent-color: var(--aksen);
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+input[type="checkbox"] {
+    border-radius: 4px;
+}
+
+input[type="checkbox"]:checked,
+input[type="radio"]:checked {
+    animation: percik-pilih 0.5s ease-out;
+}
+
+input[type="checkbox"] + label,
+input[type="radio"] + label {
+    font-weight: 400;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+/* ===== Tombol submit + efek percikan ===== */
+button[type="submit"] {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    padding: 13px;
+    background: var(--grad-aksen);
+    background-size: 200% 200%;
+    background-position: 0% 50%;
+    color: var(--putih);
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    box-shadow: 0 6px 16px var(--aksen-glow);
+    transition: background-position 0.4s, transform 0.15s, box-shadow 0.2s;
+}
+
+button[type="submit"]:hover {
+    background-position: 100% 50%;
+    box-shadow: 0 8px 20px var(--aksen-glow);
+}
+
+button[type="submit"]:active {
+    transform: scale(0.97);
+}
+
+/* Percikan: muncul saat tombol dilepas */
+button[type="submit"]::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 160%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 0) 65%);
+    transform: translate(-50%, -50%) scale(2.5);
+    opacity: 0;
+    transition: transform 0.6s ease-out, opacity 0.6s ease-out;
+    pointer-events: none;
+}
+
+button[type="submit"]:active::after {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 1;
+    transition: none;
+}
+
+button[type="submit"]:focus-visible {
+    outline: 3px solid var(--abu-teks);
+    outline-offset: 3px;
+}
+
+/* ===== Animasi percikan ===== */
+@keyframes percik-ring {
+    0%   { box-shadow: 0 0 0 0 var(--aksen), 0 0 0 3px var(--aksen-glow); }
+    100% { box-shadow: 0 0 0 14px transparent, 0 0 0 3px var(--aksen-glow); }
+}
+
+@keyframes percik-pilih {
+    0%   { transform: scale(0.7); box-shadow: 0 0 0 0 var(--aksen); }
+    50%  { transform: scale(1.25); }
+    100% { transform: scale(1); box-shadow: 0 0 0 12px transparent; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation: none !important;
+        transition: none !important;
+    }
+}
